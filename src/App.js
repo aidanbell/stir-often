@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import { Component } from 'react';
 import './App.css';
+import Timer from './components/Timer/Timer'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    timeMs: 900000,
+    timeMins: 15
+  };
+
+  changeTime = (min) => {
+    this.setState({
+      timeMins: min,
+      timeMs: min * 60000
+    })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>Stir Often:</h1>
+          <h2>Segmented Timer Tool</h2>
+          <Timer timeMs={this.state.timeMs} timeMins={this.state.timeMins} changeTime={this.changeTime}/>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
